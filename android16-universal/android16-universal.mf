@@ -1,0 +1,3 @@
+SHA256(android16-universal.ovf)= 6fd780eba8705f0e285931613d7abec3f2e9ada7c1ec064bb2d7e3f783a5f90b
+SHA256(android16-universal-disk1.vmdk.gz)= d02867ed2ead84b30e631075fb9bc1e0cf375e4bdd4f147185c6d1ed6c2198d4
+SHA256(android16-universal-disk2.vmdk.gz)= 0c655358287e992c2def0896afe82fcb2a3ec995534a011f4d3384b4475493b3
