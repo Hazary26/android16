@@ -42,10 +42,12 @@ ORACLE VIRTUALBOX
 -----------------
   File -> Import Appliance...  ->  select  android16-desktop.ovf  ->  Import
 
-  Then, BEFORE starting it, change two settings or it will not boot:
+  Then, BEFORE starting it, change these settings (the first two are
+  needed to boot, the third gives sound):
 
     Settings -> System -> Motherboard  ->  tick "Enable EFI"
     Settings -> Display -> Screen      ->  Graphics Controller: VMSVGA
+    Settings -> Audio                  ->  Audio Controller: ICH AC97
 
   Recommended as well:
     Settings -> Display -> Video Memory: 128 MB
@@ -77,7 +79,19 @@ which the machine refuses to start.
 
 SOUND
 -----
-The sound card and driver are present and detected. Audio output was
-not listened to during testing, because the machine it was built on
-had no speakers connected. If sound does not play, check the host's
-audio settings first - the virtual machine side is configured.
+Sound works in VMware, VirtualBox and QEMU.
+  VMware:     HD Audio sound card (set by the .ovf - nothing to do).
+  VirtualBox: needs the ICH AC97 sound card. INSTALL-AND-RUN sets it
+              automatically. After importing by hand, set
+              Settings -> Audio -> Audio Controller: ICH AC97
+              (VirtualBox's HD Audio cannot play at 48 kHz, so it stays
+              silent).
+
+A virtual machine has no volume buttons, so Android shows no volume
+slider while a video plays. To change the volume:
+  - the speaker icon of your own computer (controls everything), or
+  - Settings -> Sound & vibration -> Media volume, or
+  - Settings -> Accessibility -> Accessibility Menu -> turn on; its
+    on-screen button gives Volume up / Volume down.
+If there is no sound at all, check your computer's own output and that
+the VM's sound card is connected (VMware: VM -> Settings -> Sound Card).

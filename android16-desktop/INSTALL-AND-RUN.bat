@@ -48,6 +48,7 @@ if not "%VBOX%"=="" (
     "%VBOX%" modifyvm "%NAME%" --graphicscontroller vmsvga --vram 128
     "%VBOX%" modifyvm "%NAME%" --mouse usbtablet
     "%VBOX%" modifyvm "%NAME%" --nic1 nat --nictype1 82540EM
+    "%VBOX%" modifyvm "%NAME%" --audio-enabled=on --audio-controller=ac97 --audio-codec=ad1980 --audio-driver=default --audio-out=on
     echo Starting...
     "%VBOX%" startvm "%NAME%" --type gui
     exit /b 0

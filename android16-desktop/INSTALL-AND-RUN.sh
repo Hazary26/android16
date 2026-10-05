@@ -40,8 +40,7 @@ if command -v VBoxManage >/dev/null 2>&1; then
     echo "Using VirtualBox."
     VBoxManage showvminfo "$NAME" >/dev/null 2>&1 && {
         echo "Already installed - starting it."
-        setsid VBoxManage startvm "$NAME" --type gui >/dev/null 2>&1 < /dev/null &
-        exit 0; }
+        VBoxManage startvm "$NAME" --type gui; exit 0; }
 
     echo "Installing (this takes a few minutes)..."
     VBoxManage import "$OVF" --vsys 0 --vmname "$NAME" || exit 1
@@ -51,10 +50,9 @@ if command -v VBoxManage >/dev/null 2>&1; then
     VBoxManage modifyvm "$NAME" --graphicscontroller vmsvga --vram 128
     VBoxManage modifyvm "$NAME" --mouse usbtablet
     VBoxManage modifyvm "$NAME" --nic1 nat --nictype1 82540EM
+    VBoxManage modifyvm "$NAME" --audio-enabled=on --audio-controller=ac97 --audio-codec=ad1980 --audio-driver=default --audio-out=on
     echo "Starting..."
-    setsid VBoxManage startvm "$NAME" --type gui >/dev/null 2>&1 < /dev/null &
-    sleep 3
-    echo "Android is starting - the window will appear shortly."
+    VBoxManage startvm "$NAME" --type gui
     exit 0
 fi
 
@@ -70,9 +68,7 @@ if command -v ovftool >/dev/null 2>&1 && command -v vmrun >/dev/null 2>&1; then
         echo "Already installed."
     fi
     echo "Starting..."
-    setsid vmware -x "$DEST/$NAME.vmx" >/dev/null 2>&1 < /dev/null &
-    sleep 3
-    echo "Android is starting - the window will appear shortly."
+    vmrun -T ws start "$DEST/$NAME.vmx" gui 2>/dev/null || vmware -x "$DEST/$NAME.vmx" &
     exit 0
 fi
 

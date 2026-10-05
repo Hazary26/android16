@@ -50,6 +50,7 @@ if command -v VBoxManage >/dev/null 2>&1; then
     VBoxManage modifyvm "$NAME" --graphicscontroller vmsvga --vram 128
     VBoxManage modifyvm "$NAME" --mouse usbtablet
     VBoxManage modifyvm "$NAME" --nic1 nat --nictype1 82540EM
+    VBoxManage modifyvm "$NAME" --audio-enabled=on --audio-controller=ac97 --audio-codec=ad1980 --audio-driver=default --audio-out=on
     echo "Starting..."
     VBoxManage startvm "$NAME" --type gui
     exit 0
